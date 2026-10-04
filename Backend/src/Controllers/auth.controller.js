@@ -30,9 +30,16 @@ async function resgisterUser(req, res) {
     const token = jwt.sign({
         id: user._id,
         role: user.role
-    }, process.env.JWT_SECRET)
+    }, process.env.JWT_SECRET, {
+        expiresIn: "7d"
+    })
 
-    res.cookie("token", token)
+    res.cookie("token", token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+        maxAge: 7 * 24 * 60 * 60 * 1000
+    })
 
     res.status(201).json({
         message: "User Registered Successfully",
@@ -61,12 +68,22 @@ async function loginUser(req, res) {
         return res.status(401).json({ message: "Invalid User Credentials" })
     }
 
-    const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET)
+    const token = jwt.sign({
+        id: user._id,
+        role: user.role
+    }, process.env.JWT_SECRET, {
+        expiresIn: "7d"
+    })
 
-    res.cookie("token", token)
+    res.cookie("token", token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+        maxAge: 7 * 24 * 60 * 60 * 1000
+    })
 
     res.status(200).json({
-        message: "User Logged In Successfully", 
+        message: "User Logged In Successfully",
         user: {
             id: user._id,
             username: user.username,
