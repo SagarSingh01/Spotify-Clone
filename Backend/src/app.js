@@ -5,10 +5,14 @@ const musicRoutes = require('./routes/music.routes')
 const cors = require('cors')
 
 const app = express()
+
+app.get("/", (req, res) => {
+    res.send("Spotify Working Successfully")
+})
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: "https://musics-spotify.vercel.app",
     credentials: true
 }))
 

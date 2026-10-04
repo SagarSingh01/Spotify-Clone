@@ -29,8 +29,6 @@ export const AuthProvider = ({ children }) => {
         checkAuth()
     }, [])
 
-    console.log(user)
-
     return (
         <AuthContext.Provider value={{ user, setUser, loading, checkAuth }}>
             {children}
