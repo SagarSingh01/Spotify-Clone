@@ -6,9 +6,6 @@ const cors = require('cors')
 
 const app = express()
 
-app.get("/", (req, res) => {
-    res.send("Spotify Working Successfully")
-})
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
