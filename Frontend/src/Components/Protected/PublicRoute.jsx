@@ -1,11 +1,12 @@
 import { Navigate } from "react-router-dom";
 import useAuth from "../../Context Api/AuthContext";
+import Loading from "./Loading";
 
 const PublicRoute = ({ children }) => {
     const { user, loading } = useAuth()
 
     if (loading) {
-        return <div>Checking authentication...</div>
+        return <Loading />
     }
 
     if (user) {
