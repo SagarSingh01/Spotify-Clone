@@ -21,30 +21,27 @@ async function authArtist(req, res, next) {
 
     }
     catch (err) {
-        console.log(err);
         return res.status(401).json({ message: "Unauthorized" })
     }
 }
 
 async function auth(req, res, next) {
-    const token = req.cookies.token
-
-    if (!token) {
-        return res.status(401).json({ message: "Unauthorized" })
-    }
 
     try {
+        const token = req.cookies.token
+
+        if (!token) {
+            return res.status(401).json({ message: "Unauthorized" })
+        }
 
         const decoded = jwt.verify(token, process.env.JWT_SECRET)
 
         req.user = decoded
 
         next()
-
     }
 
     catch (err) {
-        console.log(err)
         return res.status(401).json({ message: "Unauthorized" })
     }
 }

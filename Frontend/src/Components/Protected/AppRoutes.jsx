@@ -5,6 +5,9 @@ import Signup from '../Register/Signup'
 import NotFound from '../../Error/NotFound'
 import { Route, Routes } from 'react-router-dom'
 import App from '../../App'
+import Verify from '../Register/Verify'
+import VerifyRoute from './VerifyRoute'
+import PrivacyPolicy from '../Privacy Policy/PrivacyPolicy'
 
 const AppRoutes = () => {
     return (
@@ -23,6 +26,16 @@ const AppRoutes = () => {
                 <PublicRoute>
                     <Signup />
                 </PublicRoute>} />
+
+            {/* Verify */}
+            <Route path='/verify' element={
+                <VerifyRoute>
+                    <Verify />
+                </VerifyRoute>
+            } />
+
+            {/* Privacy Policy */}
+            <Route path='/privacy-policy' element={<PrivacyPolicy />} />
 
             {/* Not Found */}
             <Route path='*' element={<NotFound />} />

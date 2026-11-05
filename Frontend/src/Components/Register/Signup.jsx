@@ -1,5 +1,4 @@
-import axios from 'axios'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { FaSpotify, FaEye, FaEyeSlash } from 'react-icons/fa'
 import { Link, useNavigate } from 'react-router-dom'
 import useAuth, { API } from "../../Context Api/AuthContext"
@@ -8,8 +7,6 @@ import toast from 'react-hot-toast'
 function Signup() {
 
   const navigate = useNavigate()
-
-  const { checkAuth } = useAuth()
   const [loading, setLoading] = useState(false)
   const [errors, setErrors] = useState({})
 
@@ -47,13 +44,12 @@ function Signup() {
 
     if (Object.keys(newErrors).length > 0) return
 
-    setLoading(true)
-
     try {
-      const res = await API.post("/api/auth/register", formData, { withCredentials: true })
-      await checkAuth()
-      toast.success(res?.data.message || "User Registered Successfully")
-      navigate("/")
+      setLoading(true)
+      const response = await API.post("/api/auth/register", formData, { withCredentials: true })
+      toast.success(response?.data.message || "User Registered Successfully")
+      localStorage.setItem("verifyEmail", formData.email)
+      navigate("/verify")
     }
 
     catch (err) {

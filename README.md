@@ -2,9 +2,7 @@
 
 ### A Full-Stack Music Streaming Platform Built with the MERN Stack
 
-A modern, Spotify-inspired music streaming web application built to explore **full-stack development, authentication, protected routes, REST APIs, database integration, and responsive UI development**.
-
-[![Live Demo](https://img.shields.io/badge/Live_Demo-musics--spotify.vercel.app-1DB954?style=for-the-badge&logo=vercel&logoColor=white)](https://musics-spotify.vercel.app)
+A modern, Spotify-inspired music streaming web application built to explore **full-stack development, authentication, email verification, protected routes, REST APIs, database integration, and responsive UI development**.
 
 > ⚠️ This project is created for educational purposes and is **not affiliated with Spotify AB**.
 
@@ -12,32 +10,34 @@ A modern, Spotify-inspired music streaming web application built to explore **fu
 
 ## ✨ Features
 
-### 🔐 Authentication
+### 🔐 Authentication & Security
 
-* 👤 User & Artist registration
-* 🔑 Secure login/logout system
-* 🍪 JWT authentication using HTTP-only cookies
-* 🛡️ Protected routes
-* 🔒 Role-based authentication for Users and Artists
-* 🔄 Persistent authentication across page refreshes
+- 👤 User and Artist registration
+- 📧 Email verification using OTP (One-Time Password)
+- 🔑 Secure login and logout system
+- 🍪 JWT authentication using HTTP-only cookies
+- 🛡️ Protected routes
+- 🔒 Role-based authentication for Users and Artists
+- 🔄 Persistent authentication across page refreshes
+- 🔐 Password hashing using bcrypt
 
-### 🎧 Music
+### 🎧 Music Streaming
 
-* 🎵 Browse available music
-* ▶️ Stream songs directly from the application
-* 🖼️ Display song artwork
-* 👨‍🎤 Artist information
-* 📱 Responsive music interface
+- 🎵 Browse available music tracks
+- ▶️ Stream tracks directly from the application
+- 🖼️ Display track artwork
+- 👨‍🎤 Artist information
+- 📱 Responsive music interface
 
 ### 🎨 UI / UX
 
-* 🌑 Spotify-inspired dark interface
-* 📱 Fully responsive design
-* ⚡ Fast Vite development environment
-* 💀 Loading states
-* ❌ Error handling
-* 🔔 Toast notifications
-* 🧭 Client-side routing
+- 🌑 Spotify-inspired dark interface
+- 📱 Fully responsive design
+- ⚡ Fast Vite development environment
+- 💀 Loading states and skeleton screens
+- ❌ Error handling
+- 🔔 Toast notifications
+- 🧭 Client-side routing
 
 ---
 
@@ -45,59 +45,67 @@ A modern, Spotify-inspired music streaming web application built to explore **fu
 
 ### Frontend
 
-| Technology        | Purpose                  |
-| ----------------- | ------------------------ |
-| ⚛️ React          | User interface           |
-| ⚡ Vite            | Development & build tool |
-| 🎨 Tailwind CSS   | Styling                  |
-| 🔀 React Router   | Client-side routing      |
-| 📡 Axios          | API requests             |
-| 🔔 React Toastify | Notifications            |
+| Technology | Purpose |
+|---|---|
+| ⚛️ React | User interface |
+| ⚡ Vite | Development and build tool |
+| 🎨 Tailwind CSS | Styling |
+| 🔀 React Router | Client-side routing |
+| 📡 Axios | API requests |
+| 🔔 React Toastify | Notifications |
 
 ### Backend
 
-| Technology       | Purpose           |
-| ---------------- | ----------------- |
-| 🟢 Node.js       | Runtime           |
-| 🚂 Express.js    | Backend framework |
-| 🍃 MongoDB       | Database          |
-| 🧩 Mongoose      | MongoDB ODM       |
-| 🔐 JWT           | Authentication    |
-| 🔒 bcrypt        | Password hashing  |
-| 🍪 cookie-parser | Cookie handling   |
+| Technology | Purpose |
+|---|---|
+| 🟢 Node.js | JavaScript runtime |
+| 🚂 Express.js | Backend framework |
+| 🍃 MongoDB | NoSQL database |
+| 🧩 Mongoose | MongoDB ODM |
+| 🔐 JWT | Authentication |
+| 🔒 bcrypt | Password hashing |
+| 🍪 cookie-parser | Cookie handling |
+| 📧 Nodemailer | Email delivery |
+| 🔢 OTP | Email verification |
 
 ### Deployment
 
-* ▲ **Vercel** — Frontend
-* 🚀 **Render** — Backend
-* 🍃 **MongoDB Atlas** — Database
+- ▲ **Vercel** — Frontend hosting
+- 🚀 **Render** — Backend hosting
+- 🍃 **MongoDB Atlas** — Cloud database
 
 ---
 
 ## 🏗️ Project Architecture
 
 ```text
-                    ┌──────────────────┐
-                    │     Browser      │
-                    │  React + Vite    │
-                    └────────┬─────────┘
-                             │
-                             │ HTTP / Axios
-                             ▼
-                    ┌──────────────────┐
-                    │   Express API    │
-                    │    Node.js       │
-                    └────────┬─────────┘
-                             │
-                    ┌────────▼─────────┐
-                    │ Authentication   │
-                    │ JWT + Cookies    │
-                    └────────┬─────────┘
-                             │
-                    ┌────────▼─────────┐
-                    │     MongoDB      │
-                    │  MongoDB Atlas   │
-                    └──────────────────┘
+                  ┌──────────────────┐
+                  │     Browser      │
+                  │   React + Vite   │
+                  └────────┬─────────┘
+                           │
+                           │ HTTP / Axios
+                           ▼
+                  ┌──────────────────┐
+                  │   Express API    │
+                  │     Node.js      │
+                  └────────┬─────────┘
+                           │
+                  ┌────────▼─────────┐
+                  │ Authentication   │
+                  │  JWT + Cookies   │
+                  └────────┬─────────┘
+                           │
+                  ┌────────▼─────────┐
+                  │     MongoDB      │
+                  │  MongoDB Atlas   │
+                  └──────────────────┘
+
+                           │
+                  ┌────────▼─────────┐
+                  │  Email Service   │
+                  │    Nodemailer    │
+                  └──────────────────┘
 ```
 
 ---
@@ -141,47 +149,78 @@ Spotify/
 
 ---
 
-# 🔐 Authentication Flow
+## 🔐 Authentication Flow
 
-The application uses **JWT-based authentication with HTTP-only cookies**.
+The application uses **JWT-based authentication with HTTP-only cookies** and email OTP verification during registration.
+
+### Registration & Email Verification
 
 ```text
 User
  │
  ▼
-Register / Login
+Register
  │
  ▼
-Express Authentication API
- │
- ├── Validate credentials
- │
- ├── bcrypt password verification
- │
- └── Generate JWT
+Validate User Details
  │
  ▼
-HTTP-Only Cookie
+Create User Account
  │
  ▼
-Protected API Request
+Generate OTP
  │
  ▼
-JWT Middleware
+Hash and Store OTP
  │
- ├── Valid Token ──────► Allow Request
+ ▼
+Send OTP via Email
  │
- └── Invalid Token ────► Reject Request
+ ▼
+User Enters OTP
+ │
+ ▼
+Verify OTP
+ │
+ ├── Invalid OTP ──► Reject Verification
+ │
+ └── Valid OTP ────► Verify Email
 ```
 
-### Why HTTP-only cookies?
+### Login Flow
+
+```text
+User
+ │
+ ▼
+Login
+ │
+ ▼
+Validate Credentials
+ │
+ ▼
+bcrypt Password Verification
+ │
+ ▼
+Generate JWT
+ │
+ ▼
+Set HTTP-Only Cookie
+ │
+ ▼
+Authenticated User
+```
+
+### Why HTTP-only Cookies?
 
 The JWT is stored inside an **HTTP-only cookie**, which prevents client-side JavaScript from directly accessing the token.
 
-The frontend sends authenticated requests using:
+The frontend sends authenticated requests using Axios:
 
 ```js
-axios.create({
+import axios from "axios";
+
+export const API = axios.create({
     baseURL: import.meta.env.VITE_API_URL,
     withCredentials: true
 });
@@ -189,50 +228,53 @@ axios.create({
 
 ---
 
-# 🛡️ Protected Routes
+## 🛡️ Protected Routes
 
-Users cannot access the music application without authentication.
+Users cannot access the main music application without authentication.
 
 ```text
-                    Application
-                         │
-                         ▼
-                  Is user logged in?
-                    /           \
-                  NO             YES
-                  │               │
-                  ▼               ▼
-                Login          Music App
+                Application
+                     │
+                     ▼
+              Is user logged in?
+                 /       \
+               NO         YES
+               │           │
+               ▼           ▼
+             Login      Music App
 ```
 
-Authentication state is maintained through a React Context and verified with the backend `/api/auth/me` endpoint.
+Authentication state is maintained through **React Context API** and verified with the backend `/api/auth/me` endpoint.
 
 ---
 
-# 🔌 API Overview
+## 🔌 API Overview
 
-### Authentication
+### Authentication Endpoints
 
-| Method | Endpoint             | Description            |
-| ------ | -------------------- | ---------------------- |
-| `POST` | `/api/auth/register` | Register a new user    |
-| `POST` | `/api/auth/login`    | Login user             |
-| `POST` | `/api/auth/logout`   | Logout user            |
-| `GET`  | `/api/auth/me`       | Get authenticated user |
+| Method | Endpoint | Description |
+|---|---|---|
+| `POST` | `/api/auth/register` | Register a new user |
+| `POST` | `/api/auth/verify-email` | Verify email using OTP |
+| `POST` | `/api/auth/login` | Login user |
+| `POST` | `/api/auth/logout` | Logout user |
+| `GET` | `/api/auth/me` | Get authenticated user |
 
-### Music
+### Music Endpoints
 
-| Method | Endpoint     | Description           |
-| ------ | ------------ | --------------------- |
-| `GET`  | `/api/music` | Fetch available music |
+| Method | Endpoint | Description |
+|---|---|---|
+| `GET` | `/api/music` | Fetch available music tracks |
 
 > API endpoints may change as the project continues to evolve.
 
 ---
 
-# 🚀 Getting Started
+## 🚀 Getting Started
 
-## 1️⃣ Clone the Repository
+Follow these steps to run the project locally.
+
+### 1️⃣ Clone the Repository
 
 ```bash
 git clone https://github.com/SagarSingh01/your-repository.git
@@ -240,9 +282,9 @@ git clone https://github.com/SagarSingh01/your-repository.git
 cd your-repository
 ```
 
----
+> Replace `your-repository` with your actual GitHub repository name.
 
-## 2️⃣ Setup Backend
+### 2️⃣ Setup Backend
 
 ```bash
 cd Backend
@@ -253,26 +295,39 @@ npm install
 Create a `.env` file inside the `Backend` directory:
 
 ```env
+PORT=3000
+
 MONGO_URI=your_mongodb_connection_string
+
 JWT_SECRET=your_jwt_secret
+
+# Email Configuration
+GOOGLE_USER=your_email@gmail.com
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+GOOGLE_REFRESH_TOKEN=your_google_refresh_token
 ```
 
-### ⚠️ Configure CORS for local development
+> The email configuration above is for a Gmail OAuth2 setup with Nodemailer. Add any other environment variables required by your backend.
 
-In `Backend/src/app.js`, set the CORS origin to your local frontend URL (`http://localhost:5173`) and enable credentials so the authentication cookie can be sent:
+#### ⚠️ Configure CORS for Local Development
+
+In `Backend/src/app.js`, configure CORS to allow requests from your local frontend:
 
 ```js
 import cors from "cors";
 
 app.use(
     cors({
-        origin: "http://localhost:5173", // Frontend URL
-        credentials: true,
+        origin: "http://localhost:5173",
+        credentials: true
     })
 );
 ```
 
-> 🚀 **For production:** change the origin to your deployed frontend URL, e.g. `https://musics-spotify.vercel.app`.
+> 🚀 **For production:** Configure the CORS origin to your deployed frontend URL:
+>
+> `https://musics-spotify.vercel.app`
 
 Start the backend:
 
@@ -280,15 +335,13 @@ Start the backend:
 npm start
 ```
 
-The backend will run on:
+The backend will run at:
 
 ```text
 http://localhost:3000
 ```
 
----
-
-## 3️⃣ Setup Frontend
+### 3️⃣ Setup Frontend
 
 Open another terminal:
 
@@ -298,13 +351,7 @@ cd Frontend
 npm install
 ```
 
-Create:
-
-```text
-Frontend/.env
-```
-
-Add:
+Create a `.env` file inside the `Frontend` directory:
 
 ```env
 VITE_API_URL=http://localhost:3000
@@ -316,83 +363,97 @@ Start the development server:
 npm run dev
 ```
 
-Then open `http://localhost:5173` in your browser.
+Open the application:
+
+```text
+http://localhost:5173
+```
 
 ---
 
-# 🌐 Environment Variables
+## 🌐 Environment Variables
 
-### Backend
+Configure the following environment variables before running the application.
 
-```env
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret
-```
+### Backend (`Backend/.env`)
 
-### Frontend
+| Variable | Description |
+|---|---|
+| `PORT` | Backend server port |
+| `MONGO_URI` | MongoDB connection string |
+| `JWT_SECRET` | Secret key used to sign JWTs |
+| `GOOGLE_USER` | Gmail account used to send verification emails |
+| `GOOGLE_CLIENT_ID` | Google OAuth client ID |
+| `GOOGLE_CLIENT_SECRET` | Google OAuth client secret |
+| `GOOGLE_REFRESH_TOKEN` | Google OAuth refresh token |
 
-```env
-VITE_API_URL=http://localhost:3000
-```
+### Frontend (`Frontend/.env`)
 
-> Never commit your `.env` files or expose your JWT secret and database credentials.
+| Variable | Description |
+|---|---|
+| `VITE_API_URL` | Backend API base URL |
+
+> **Security Note:** Never commit your `.env` files or expose your JWT secret, database credentials, OAuth credentials, or refresh token.
 
 ---
 
-# 💡 What I Learned
+## 💡 What I Learned
 
-Building this project helped me understand how a real full-stack application works from frontend to database.
+Building this project helped me understand how a full-stack application works, from frontend interactions to backend processing and database operations.
 
 ### Frontend
 
-* React component architecture
-* React Router
-* Context API
-* Custom hooks
-* Axios
-* Protected routes
-* Authentication state management
-* Form validation
-* Loading and error states
-* Responsive Tailwind CSS
+- React component architecture
+- React Router
+- Context API
+- Custom Hooks
+- Axios and API integration
+- Protected routes
+- Authentication state management
+- Form validation
+- Loading and error states
+- Responsive Tailwind CSS
 
 ### Backend
 
-* REST API development
-* Express middleware
-* MVC-style architecture
-* MongoDB & Mongoose
-* Password hashing with bcrypt
-* JWT authentication
-* HTTP-only cookies
-* Role-based authorization
-* CORS configuration
-* Error handling
+- REST API development
+- Express middleware
+- MVC-style architecture
+- MongoDB and Mongoose
+- Password hashing with bcrypt
+- JWT authentication
+- HTTP-only cookies
+- Role-based authorization
+- Email OTP generation and verification
+- OTP hashing and validation
+- Sending emails using Nodemailer and Gmail OAuth2
+- CORS configuration
+- Error handling
 
 ### Deployment
 
-* Frontend deployment with Vercel
-* Backend deployment with Render
-* MongoDB Atlas configuration
-* Production environment variables
-* Frontend ↔ backend communication in production
+- Frontend deployment with Vercel
+- Backend deployment with Render
+- MongoDB Atlas configuration
+- Production environment variables
+- Frontend and backend communication in production
 
 ---
 
-# 📈 Future Improvements
+## 📈 Future Improvements
 
 This project is still evolving. Planned improvements include:
 
-* [ ] 🔍 Music search
-* [ ] ❤️ Like / unlike songs
-* [ ] 📚 Create playlists
-* [ ] 👨‍🎤 Artist dashboard
-* [ ] ⬆️ Artist music upload
-* [ ] 🌐 More advanced music discovery
+- [ ] 🔍 Music search
+- [ ] ❤️ Like / Unlike tracks
+- [ ] 📚 Create and manage playlists
+- [ ] 👨‍🎤 Artist dashboard
+- [ ] ⬆️ Artist music uploads
+- [ ] 🌐 Advanced music discovery
 
 ---
 
-# 📚 Purpose of the Project
+## 📚 Purpose of the Project
 
 This project was built as a **learning-focused full-stack application** to understand how modern web applications handle:
 
@@ -403,6 +464,8 @@ API Requests
    ↓
 Authentication
    ↓
+Email Verification
+   ↓
 Backend Logic
    ↓
 Database
@@ -412,19 +475,15 @@ Response
 Frontend UI
 ```
 
-Rather than being just a UI clone, the project focuses on implementing the **full authentication and application architecture behind a music platform**.
+Rather than being just a UI clone, this project focuses on implementing the **full authentication and application architecture behind a music streaming platform**.
 
 ---
 
-# 👨‍💻 Author
+## 👨‍💻 Author
 
 ### Sagar Singh
 
 **MERN Stack Developer | BCA Student**
-
-[![Portfolio](https://img.shields.io/badge/Portfolio-000000?style=for-the-badge&logo=googlechrome&logoColor=white)](https://sagar-singh.vercel.app)
-[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/SagarSingh01)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/sagar-singh001/)
 
 ---
 

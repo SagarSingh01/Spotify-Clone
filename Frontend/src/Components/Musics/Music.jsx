@@ -1,13 +1,18 @@
 import useFetch from '../../Custom Hooks/useFetch'
 import { FaMusic } from "react-icons/fa";
+import MusicSkeleton from './MusicSkeleton';
+import MusicError from './MusicError';
 
 const Music = () => {
 
-    const [music] = useFetch("/api/music")
+    const [music, loading, error] = useFetch("/api/music")
+
+    if (loading) return <MusicSkeleton />
+
+    if (error) return <MusicError />
 
     return (
         <div className='p-5 grid gap-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 place-content-center'>
-
             {
                 music?.map((song) => (
                     <div
