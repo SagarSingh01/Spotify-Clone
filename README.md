@@ -277,12 +277,10 @@ Follow these steps to run the project locally.
 ### 1️⃣ Clone the Repository
 
 ```bash
-git clone https://github.com/SagarSingh01/your-repository.git
+git clone https://github.com/SagarSingh01/Spotify-Clone
 
-cd your-repository
+cd Spotyfy-Clone
 ```
-
-> Replace `your-repository` with your actual GitHub repository name.
 
 ### 2️⃣ Setup Backend
 
@@ -319,7 +317,7 @@ import cors from "cors";
 
 app.use(
     cors({
-        origin: "http://localhost:5173",
+        origin: process.env.CLIENT_URL,
         credentials: true
     })
 );
